@@ -92,6 +92,6 @@ jobs:
         uses: qltysh/qlty-action/coverage@v2
         with:
           token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
-          files: coverage.xml
+          files: api/coverage.xml
           tag: backend
           add-prefix: api
