@@ -86,3 +86,12 @@ jobs:
         with:
           env_vars: PYTHON
           use_oidc: true
+
+      - name: Upload Coverage to Qlty
+        if: always()
+        uses: qltysh/qlty-action/coverage@v2
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: coverage.xml
+          tag: backend
+          add-prefix: api
