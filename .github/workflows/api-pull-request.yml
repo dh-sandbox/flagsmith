@@ -2,7 +2,7 @@ name: API Pull Request
 
 permissions:
   contents: read # For actions/checkout
-  id-token: write # For Codecov OIDC
+  id-token: write
 
 on:
   pull_request:
@@ -78,14 +78,6 @@ jobs:
 
       - name: Run Tests
         run: make test
-
-      - name: Upload Coverage
-        uses: codecov/codecov-action@v5
-        env:
-          PYTHON: ${{ matrix.python-version }}
-        with:
-          env_vars: PYTHON
-          use_oidc: true
 
       - name: Upload Coverage to Qlty
         if: always()

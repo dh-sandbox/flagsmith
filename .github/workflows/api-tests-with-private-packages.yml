@@ -2,7 +2,7 @@ name: API Pull Request with Private Packages
 
 permissions:
   contents: read # For actions/checkout
-  id-token: write # For Codecov OIDC
+  id-token: write
 
 on:
   pull_request:
@@ -65,11 +65,11 @@ jobs:
           DOTENV_OVERRIDE_FILE: .env-ci
         run: make test
 
-      - name: Upload Coverage
-        uses: codecov/codecov-action@v5
-        env:
-          PRIVATE_PACKAGES: "true"
-          PYTHON: ${{ matrix.python-version }}
+      - name: Upload Coverage to Qlty
+        if: always()
+        uses: qltysh/qlty-action/coverage@v2
         with:
-          env_vars: PRIVATE_PACKAGES,PYTHON
-          use_oidc: true
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: api/coverage.xml
+          tag: backend-private
+          add-prefix: api
