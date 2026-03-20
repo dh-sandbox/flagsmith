@@ -6,6 +6,12 @@ on:
     paths:
       - frontend/**
       - .github/workflows/frontend-pull-request.yml
+  push:
+    paths:
+      - frontend/**
+      - .github/workflows/frontend-pull-request.yml
+    branches:
+      - main
 
 permissions:
   contents: read
